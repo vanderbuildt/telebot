@@ -3,6 +3,7 @@
 import requests
 import datetime
 
+token = "558253283:AAGsWj4xlW02_Ogfw3OtYwjYprxZBQ-ZPUk"
 
 class BotHandler:
 
@@ -33,8 +34,7 @@ class BotHandler:
             last_update = get_result[len(get_result)]
         return last_update
 
-
-greet_bot = BotHandler(558253283:AAGsWj4xlW02_Ogfw3OtYwjYprxZBQ-ZPUk)
+greet_bot = BotHandler(token)
 greetings = ('hello', 'hi', 'greetings', 'sup')
 now = datetime.datetime.now()
 
