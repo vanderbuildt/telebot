@@ -68,16 +68,18 @@ def main():
                 first_chat_name = last_update['message']['chat']['last_name']
             except:
                 first_chat_name = "none"
-                
+ 
+            print("here last_chat_id = ", last_chat_id)
+            
             if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
                 greet_bot.send_message(last_chat_id, 'Good Morning  {}'.format(last_chat_name))
-                today += 1
+                today += 0
             elif last_chat_text.lower() in greetings and today == now.day and 12 <= hour < 17:
                 greet_bot.send_message(last_chat_id, 'Good Afternoon {}'.format(last_chat_name))
-                today += 1
+                today += 0
             elif last_chat_text.lower() in greetings and today == now.day and 17 <= hour < 23:
                 greet_bot.send_message(last_chat_id, 'Good Evening  {}'.format(last_chat_name))
-                today += 1
+                today += 0
             new_offset = last_update_id + 1
         else:
             print("No updates")
