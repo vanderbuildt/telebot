@@ -38,6 +38,14 @@ greet_bot = BotHandler(token)
 greetings = ('hello', 'hi', 'greetings', 'sup')
 now = datetime.datetime.now()
 
+def write_chats(filename, information, today):
+    """
+    Create a txt file for every user, who texts the bot.
+    Write down the messages and time of chat in a txt file.
+    """
+    new = open(filename, "a")
+    new.write(today+"\n")
+    new.write(str(information) + "\n")
 
 def main():
     new_offset = None
@@ -51,18 +59,28 @@ def main():
         if type(last_update) != list:
             last_update_id = last_update['update_id']
             last_chat_text = last_update['message']['text']
+            print(last_chat_text, len(last_chat_text), type(last_chat_text))
+
             last_chat_id = last_update['message']['chat']['id']
             last_chat_name = last_update['message']['chat']['first_name']
+            
+            try:
+                first_chat_name = last_update['message']['chat']['last_name']
+            except:
+                first_chat_name = "none"
+                
             if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
                 greet_bot.send_message(last_chat_id, 'Good Morning  {}'.format(last_chat_name))
-            today += 1
-        elif last_chat_text.lower() in greetings and today == now.day and 12 <= hour < 17:
-            greet_bot.send_message(last_chat_id, 'Good Afternoon {}'.format(last_chat_name))
-            today += 1
-        elif last_chat_text.lower() in greetings and today == now.day and 17 <= hour < 23:
-            greet_bot.send_message(last_chat_id, 'Good Evening  {}'.format(last_chat_name))
-            today += 1
-        new_offset = last_update_id + 1
+                today += 1
+            elif last_chat_text.lower() in greetings and today == now.day and 12 <= hour < 17:
+                greet_bot.send_message(last_chat_id, 'Good Afternoon {}'.format(last_chat_name))
+                today += 1
+            elif last_chat_text.lower() in greetings and today == now.day and 17 <= hour < 23:
+                greet_bot.send_message(last_chat_id, 'Good Evening  {}'.format(last_chat_name))
+                today += 1
+            new_offset = last_update_id + 1
+        else:
+            print("No updates")
 
 if __name__ == '__main__':
     try:
