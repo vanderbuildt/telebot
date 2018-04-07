@@ -3,7 +3,7 @@
 import requests
 import datetime
 
-token = "558253283:AAGsWj4xlW02_Ogfw3OtYwjYprxZBQ-ZPUk"
+
 
 class BotHandler:
 
